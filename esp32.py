@@ -21,10 +21,6 @@ bwd_a.freq(1000)
 fwd_b.freq(1000)
 bwd_b.freq(1000)
 
-def setup():
-    # В MicroPython пины настраиваются автоматически при создании PWM
-    pass
-
 def stop_all():
     """Остановить все моторы"""
     fwd_a.duty_u16(0)
@@ -58,40 +54,8 @@ def loop():
         time.sleep(5)
         bwd_b.duty_u16(0)
 
-# Альтернативный вариант с использованием диапазона 0-65535
-def loop_alternative():
-    MaxSpd_16 = 30000  # Пример значения для диапазона 0-65535
-    
-    while True:
-        # Движение двигателем A вперед
-        bwd_a.duty_u16(0)
-        fwd_a.duty_u16(MaxSpd_16)
-        time.sleep(5)
-        stop_all()
-        time.sleep(0.1)
-        
-        # Движение двигателем A назад
-        bwd_a.duty_u16(MaxSpd_16)
-        fwd_a.duty_u16(0)
-        time.sleep(5)
-        stop_all()
-        time.sleep(0.1)
-        
-        # Движение двигателем B вперед
-        bwd_b.duty_u16(0)
-        fwd_b.duty_u16(MaxSpd_16)
-        time.sleep(5)
-        stop_all()
-        time.sleep(0.1)
-        
-        # Движение двигателем B назад
-        bwd_b.duty_u16(MaxSpd_16)
-        fwd_b.duty_u16(0)
-        time.sleep(5)
-        stop_all()
-        time.sleep(0.1)
 
 # Запуск программы
 if __name__ == "__main__":
     setup()
-    loop()  # или loop_alternative()
+    loop() 
